@@ -29,7 +29,12 @@ plan <- drake_plan(
  # Get data from an external source
  # Load the data in
  # Plot the data, summarize the data, etc. to make sure there are no weird values.
- soils_dat = read.csv(file=file_in("data/Soil.csv"), stringsAsFactors = FALSE)
+ soils_dat = read.csv(file=file_in("data/Soil.csv"), header = TRUE, stringsAsFactors = FALSE),
+ soil_long = gather(soils_dat, site, N_content, AR, RB, WB, GB),
+Nitrogen = soil_long$N_content,
+Nitrogen2 = as.numeric(as.character(Nitrogen)),
+ploted_N = boxplot(Nitrogen2) ## I know this is a bad plot, but I was struggling with the code
+  #as.numeric(as.character(soil_long$N_content))
  
    #phy = ape::rcoal(20+round(stats::runif(1,1,20))),
    #even = is_even(phy),
